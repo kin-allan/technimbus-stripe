@@ -23,11 +23,11 @@ class Radar {
     }
 
     /**
-     * Check payment intent if needs to change the order status to review based on the risk level
+     * Check if the order is dangerous
      * @param  Order  $order
      * @param  string $paymentIntentId
      */
-    public function evaluate(Order $order, $paymentIntentId)
+    public function isRiskOrder(Order $order, $paymentIntentId)
     {
         \Stripe\Stripe::setApiKey($this->configs->getApiKey());
 
@@ -45,12 +45,13 @@ class Radar {
         if ($paymentIntent) {
             $riskLevel = $this->getRiskLevel($paymentIntent);
             if (in_array($riskLevel, $this->configs->getHoldRiskLevels())) {
-                $order->setState(Order::STATE_COMPLETE)->setStatus(StripeOrderStatus::STRIPE_SUSPECT_FRAUD)->save();
-                $order->addStatusHistoryComment(__('Stripe Radar hold this order due the risk level. Please check if it\'s not a fraud order'))->save();
+                return true;
             } else {
-                $order->setState(Order::STATE_COMPLETE)->setStatus(Order::STATE_COMPLETE)->save();
+                return false;
             }
         }
+
+        return false;
     }
 
     /**

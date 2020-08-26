@@ -144,6 +144,30 @@
                             <field id="radar">1</field>
                         </depends>
                 </field>
+                <!-- Hold AVS Fail Orders -->
+                <field
+                    id="hold_avs_fail"
+                    translate="label"
+                    type="select"
+                    sortOrder="90"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="0">
+                        <label>Hold when AVS fails</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <!-- Hold CVC Fail Orders -->
+                <field
+                    id="hold_cvc_fail"
+                    translate="label"
+                    type="select"
+                    sortOrder="100"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="0">
+                        <label>Hold when CVC fails</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
             </group>
         </section>
     </system>

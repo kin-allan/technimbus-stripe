@@ -54,6 +54,16 @@ class Configs {
     CONST XML_PATH_RISK_LEVELS = 'payment/technimbus_stripe/risk_level';
 
     /**
+     * Path to config value to check if needs to hold orders when avs check fails
+     */
+    CONST XML_PATH_HOLD_AVS_FAIL = 'payment/technimbus_stripe/hold_avs_fail';
+
+    /**
+     * Path to config value to check if needs to hold orders when cvc check fails
+     */
+    CONST XML_PATH_HOLD_CVC_FAIL = 'payment/technimbus_stripe/hold_cvc_fail';
+
+    /**
      * @var ScopeConfigInterface
      */
     protected $scopeConfig;
@@ -125,7 +135,7 @@ class Configs {
      */
     public function isRadarEnable()
     {
-        return $this->scopeConfig->getValue(self::XML_PATH_RADAR, ScopeInterface::SCOPE_WEBSITE) === Yesno::YES;
+        return (int) $this->scopeConfig->getValue(self::XML_PATH_RADAR, ScopeInterface::SCOPE_WEBSITE) === Yesno::YES;
     }
 
     /**
@@ -135,6 +145,24 @@ class Configs {
     public function getHoldRiskLevels()
     {
         return explode(",", $this->scopeConfig->getValue(self::XML_PATH_RISK_LEVELS, ScopeInterface::SCOPE_WEBSITE));
+    }
+
+    /**
+     * Should hold orders when fail avs check?
+     * @return array
+     */
+    public function holdOrdersWhenAVSFails()
+    {
+        return (int) $this->scopeConfig->getValue(self::XML_PATH_HOLD_AVS_FAIL, ScopeInterface::SCOPE_WEBSITE) === Yesno::YES;
+    }
+
+    /**
+     * Should hold orders when fail cvc check?
+     * @return array
+     */
+    public function holdOrdersWhenCVCFails()
+    {
+        return (int) $this->scopeConfig->getValue(self::XML_PATH_HOLD_CVC_FAIL, ScopeInterface::SCOPE_WEBSITE) === Yesno::YES;
     }
 
     /**
