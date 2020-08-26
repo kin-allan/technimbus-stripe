@@ -1,0 +1,68 @@
+<!-- ko if: isActive -->
+<div class="payment-method" data-bind="css: {'_active': (getCode() == isChecked())}" afterRender="initStripe()">
+    <div class="payment-method-title field choice">
+        <input type="radio"
+               name="payment[method]"
+               class="radio"
+               data-bind="attr: {'id': getCode()}, value: getCode(), checked: isChecked, click: selectPaymentMethod, visible: isRadioButtonVisible()" />
+        <label data-bind="attr: {'for': getCode()}" class="label">
+            <span data-bind="text: getTitle()"></span>
+        </label>
+    </div>
+    <div class="payment-method-content">
+        <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <div class="payment-method-billing-address">
+            <!-- ko foreach: $parent.getRegion(getBillingAddressFormName()) -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+
+        <div data-bind="attr: {'id': getCode() + '-form'}" >
+            <div class="stripe-box">
+                <div class="form-row stripe-row cardholder-box">
+                    <input
+                        type="text"
+                        name="technimbus-stripe-card-cardname"
+                        id="technimbus-stripe-card-cardname"
+                        data-bind="
+                            value: cardholder_name,
+                            attr: { placeholder: $t('Cardholder Name')}
+                        " />
+                </div>
+                <div class="form-row stripe-row">
+                    <div id="card-number" class="card-field"></div>
+                    <div id="card-expiry" class="card-field"></div>
+                    <div id="card-cvc" class="card-field"></div>
+                    <div id="card-errors" role="alert"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="checkout-agreements-block">
+            <!-- ko foreach: $parent.getRegion('before-place-order') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button data-role="review-save"
+                        type="button"
+                        id="technimbus-stripe-submit-button"
+                        data-bind="
+                        attr: {title: $t('Place Order')},
+                        enable: (getCode() == isChecked()),
+                        css: {disabled: !isPlaceOrderActionAllowed()},
+                        click: saveOrder
+                        "
+                        class="action primary checkout"
+                        disabled>
+                    <span data-bind="i18n: 'Place Order'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /ko -->

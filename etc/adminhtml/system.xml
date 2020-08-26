@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment" translate="label">
+            <group id="technimbus_stripe" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>TechNimbus Stripe</label>
+                <!-- Active -->
+                <field
+                    id="active"
+                    translate="label"
+                    type="select"
+                    sortOrder="10"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="0">
+                        <label>Active</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <!-- Title -->
+                <field
+                    id="title"
+                    translate="label comment"
+                    type="text"
+                    sortOrder="20"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1">
+                        <label>Title</label>
+                        <comment>The payment title displayed at checkout.</comment>
+                </field>
+                <!-- Mode -->
+                <field
+                    id="mode"
+                    translate="label"
+                    type="select"
+                    sortOrder="30"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="0">
+                        <label>Mode</label>
+                        <source_model>TechNimbus\Stripe\Model\Config\Source\Mode</source_model>
+                </field>
+                <!-- Key -->
+                <field
+                    id="api_key"
+                    translate="label comment"
+                    type="obscure"
+                    sortOrder="40"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="0">
+                        <label>API Key</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        <comment><![CDATA[This is provided from stripe, you can get this information <a href='https://dashboard.stripe.com/account/apikeys' target='_blank'>here</a>]]></comment>
+                        <depends>
+                            <field id="mode">live</field>
+                        </depends>
+                </field>
+                <!-- Publishable Key -->
+                <field
+                    id="publishable_key"
+                    translate="label comment"
+                    type="obscure"
+                    sortOrder="50"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="0">
+                        <label>Publishable Key</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        <comment><![CDATA[This is provided from stripe, you can get this information <a href='https://dashboard.stripe.com/account/apikeys' target='_blank'>here</a>]]></comment>
+                        <depends>
+                            <field id="mode">live</field>
+                        </depends>
+                </field>
+                <!-- Test Key -->
+                <field
+                    id="test_api_key"
+                    translate="label comment"
+                    type="obscure"
+                    sortOrder="40"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="0">
+                        <label>API Key</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        <comment><![CDATA[This is provided from stripe, you can get this information <a href='https://dashboard.stripe.com/account/apikeys' target='_blank'>here</a>]]></comment>
+                        <depends>
+                            <field id="mode">test</field>
+                        </depends>
+                </field>
+                <!-- Test Publishable Key -->
+                <field
+                    id="test_publishable_key"
+                    translate="label comment"
+                    type="obscure"
+                    sortOrder="50"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="0">
+                        <label>Publishable Key</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        <comment><![CDATA[This is provided from stripe, you can get this information <a href='https://dashboard.stripe.com/account/apikeys' target='_blank'>here</a>]]></comment>
+                        <depends>
+                            <field id="mode">test</field>
+                        </depends>
+                </field>
+                <!-- Order Status -->
+                <field
+                    id="order_status"
+                    translate="label comment"
+                    type="select"
+                    sortOrder="55"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="0">
+                        <label>Order Status</label>
+                        <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+                        <comment>Order status after place the order. Note: If Radar is enable it may override to suspect fraud status, if the order has the selected risk level</comment>
+                </field>
+                <!-- Radar -->
+                <field
+                    id="radar"
+                    translate="label"
+                    type="select"
+                    sortOrder="70"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="0">
+                        <label>Radar</label>
+                        <source_model>TechNimbus\Stripe\Model\Config\Source\Yesno</source_model>
+                </field>
+                <!-- Risk Level Block -->
+                <field
+                    id="risk_level"
+                    translate="label"
+                    type="multiselect"
+                    sortOrder="80"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="0">
+                        <label>Deny when risk level is</label>
+                        <source_model>TechNimbus\Stripe\Model\Config\Source\RiskLevel</source_model>
+                        <depends>
+                            <field id="radar">1</field>
+                        </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

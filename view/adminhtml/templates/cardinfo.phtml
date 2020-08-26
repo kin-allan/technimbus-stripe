@@ -1,0 +1,32 @@
+<?php
+
+/** @var $block \TechNimbus\Stripe\Block\Adminhtml\CartInfo */
+ ?>
+
+<?php if ($block->isStripeMethod()): ?>
+    <div class="stripe-card-box">
+        <div class="stripe-card-row">
+            <div class="stripe-card-number">
+                <input type="text" name="stripe-card-number" value="**** **** **** <?= $block->getCardNumber(); ?>" disabled="disabled" />
+            </div>
+        </div>
+        <div class="stripe-card-row">
+            <div class="stripe-card-expiry">
+                <input type="text" name="stripe-card-expiry" value="<?= $block->getCardExpiry(); ?>" disabled="disabled" />
+            </div>
+            <div class="stripe-card-brand">
+                <img src="<?= $block->getViewFileUrl('TechNimbus_Stripe::images/' . strtolower($block->getBrand()) . '.svg'); ?>" alt="Brand" title="<?= strtoupper($block->getBrand()); ?>" />
+            </div>
+        </div>
+    </div>
+    <div class="stripe-card-check">
+        <div class="stripe-box-check">
+            <?php $avsCheck = $block->getAvsCheck() ? __('Valid') : __('Fail'); ?>
+            <span class="check-label"><?= __('AVS Check'); ?>:</span><span class="<?= $avsCheck; ?>"><?= $avsCheck; ?></span>
+        </div>
+        <div class="stripe-box-check">
+            <?php $cvcCheck = $block->getAvsCheck() ? __('Valid') : __('Fail'); ?>
+            <span class="check-label"><?= __('CVC Check'); ?>:</span><span class="<?= $cvcCheck; ?>"><?= $cvcCheck; ?></span>
+        </div>
+    </div>
+<?php endif; ?>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<routes
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/technimbus_stripe/createSetupIntent" method="POST">
+        <service class="TechNimbus\Stripe\Api\SetupIntentInterface" method="createAsCustomer" />
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/technimbus_stripe/createSetupIntent/:cartToken" method="POST">
+        <service class="TechNimbus\Stripe\Api\SetupIntentInterface" method="createAsGuest" />
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+</routes>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:Event:etc/events.xsd">
+
+    <event name="payment_method_assign_data_technimbus_stripe">
+        <observer name="technimbus_stripe_data_assigner" instance="TechNimbus\Stripe\Observer\DataAssign" />
+    </event>
+
+    <event name="checkout_submit_all_after">
+        <observer name="technimbus_stripe_save_order_after_submit" instance="TechNimbus\Stripe\Observer\SaveOrderAfterSubmit"/>
+    </event>
+</config>

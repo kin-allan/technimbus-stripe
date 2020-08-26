@@ -1,0 +1,58 @@
+#card-number {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+}
+
+#card-expiry {
+    display: inline-block;
+    width: calc(50% - 10px);
+    margin-right: 15px;
+}
+
+#card-cvc {
+    display: inline-block;
+    width: calc(50% - 10px);
+}
+
+.stripe-box {
+    width: 100%;
+    background-color: #E6E3E3;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+}
+
+.stripe-row {
+    margin: 20px 0px;
+}
+
+.stripe-row .card-field {
+    border-radius: 1px;
+    border: 1px solid #C2C2C2;
+    vertical-align: baseline;
+    background-color: #FFF;
+    height: 32px;
+    padding: 0px 9px;
+    box-sizing: border-box;
+}
+
+.stripe-row #card-errors {
+    color: #F91C1C;
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.stripe-row .card-field input:focus {
+    box-shadow: 0px 0px 3px 1px #00699D;
+}
+
+@media screen and (min-width: 480px) {
+    .stripe-box {
+        width: 360px;
+    }
+}

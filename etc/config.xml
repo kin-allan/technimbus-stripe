@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <technimbus_stripe>
+                <active>0</active>
+                <title>TechNimbus Stripe</title>
+                <mode>test</mode>
+                <model>TechNimbus\Stripe\Model\Stripe</model>
+                <order_status>complete</order_status>
+                <radar>1</radar>
+                <risk_level>highest</risk_level>
+            </technimbus_stripe>
+        </payment>
+    </default>
+</config>
