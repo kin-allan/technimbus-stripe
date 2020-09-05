@@ -45,13 +45,13 @@ class Customer {
 
         if (!$magentoCustomer) {
             $billingAddress = $quote->getBillingAddress();
-            $customer = $this->customerFactory->create();
-            $customer->setEmail($billingAddress->getEmail());
-            $customer->setFirstname($billingAddress->getFirstname());
-            $customer->setLastname($billingAddress->getLastname());
+            $magentoCustomer = $this->customerFactory->create();
+            $magentoCustomer->setEmail($billingAddress->getEmail());
+            $magentoCustomer->setFirstname($billingAddress->getFirstname());
+            $magentoCustomer->setLastname($billingAddress->getLastname());
         }
 
-        $stripeCustomer = $this->getStripeCustomer($customer, $paymentMethodId);
+        $stripeCustomer = $this->getStripeCustomer($magentoCustomer, $paymentMethodId);
 
         if ($stripeCustomer) {
             return $stripeCustomer;

@@ -1,0 +1,3 @@
+interface ProductInterface {
+    is_stripe_subscription: Boolean @doc(description: "Is Stripe Subscription") @resolver(class: "TechNimbus\\Stripe\\Model\\Resolver\\Product\\IsStripeSubscription")
+}
